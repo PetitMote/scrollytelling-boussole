@@ -10,31 +10,13 @@ La donnée est chargée avec en tête les exports de PostgreSQL :
 - Les noms des autres colonnes sont ceux des séries de données
  */
 const data = {
-    superficieFrance:
+    repartitionEmissions:
         [
-            {label: 'Aucun habitant', 'Surface (ha)': 17500000},
-            {label: 'Présence d’habitants', 'Surface (ha)': 37500000},
-        ],
-    superficieFranceBis:
-        [
-            {label: 'Aucun habitant', 'Surface (ha)': 17500000},
-            {label: 'Présence d’habitants', 'Surface (ha)': 37500000},
-        ],
-    superficieRegions:
-        [
-            {label: 'Île-de-France', 'Surface sans habitants (ha)': 831683},
-            {label: 'Centre-Val de Loire', 'Surface sans habitants (ha)': 2758933},
-            {label: 'Bourgogne-Franche-Comté', 'Surface sans habitants (ha)': 2710019},
-            {label: 'Normandie', 'Surface sans habitants (ha)': 2629621},
-            {label: 'Hauts-de-France', 'Surface sans habitants (ha)': 2021602},
-            {label: 'Grand Est', 'Surface sans habitants (ha)': 2430091},
-            {label: 'Pays de la Loire', 'Surface sans habitants (ha)': 2956420},
-            {label: 'Bretagne', 'Surface sans habitants (ha)': 2621520},
-            {label: 'Nouvelle-Aquitaine', 'Surface sans habitants (ha)': 6538606},
-            {label: 'Occitanie', 'Surface sans habitants (ha)': 5051758},
-            {label: 'Auvergne-Rhône-Alpes', 'Surface sans habitants (ha)': 4931872},
-            {label: 'Provence-Alpes-Côte d\'Azur', 'Surface sans habitants (ha)': 1547147},
-            {label: 'Corse', 'Surface sans habitants (ha)': 285071},
+            {label: 'Transport de marchandises', 'Émissions (t.eqCO2)': 42},
+            {label: 'Tertiaire', 'Émissions (t.eqCO2)': 29},
+            {label: 'Industrie', 'Émissions (t.eqCO2)': 23},
+            {label: 'Agriculture', 'Émissions (t.eqCO2)': 4},
+            {label: 'Déchets', 'Émissions (t.eqCO2)': 2},
         ]
 };
 /*
@@ -44,35 +26,21 @@ Répertoire des configurations de graphiques, des objets contenant les informati
 - legend: true pour afficher la légende, false pour la masquer
  */
 const chartsConfigurations = {
-    superficieFrance: {
+    valeurEmissionsActEco: {
         title: null,
         type: 'pie',
         legend: true,
     },
-    superficieFranceBis: {
-        title: null,
-        type: 'pie',
+    repartitionEmissions: {
+        title: 'Répartition des émissions de gaz à effet de serre des activités économiques',
+        type: 'doughnut',
         legend: true,
     },
-    superficieRegions: {
-        title: null,
-        type: 'bar',
-        legend: true,
-    }
 };
 /*
 Répertoire des "hooks" : des fonctions à exécuter avant ou après certains évènements de scroll
  */
-const hooks = {
-    superficieRegion: function () {
-        const fakeScroll = {
-            'scroll-figure': 'chart-sup-region',
-            'scroll-type': 'chart',
-            'scroll-chart-name': 'superficieFranceBis'
-        }
-        scrollEvent(fakeScroll);
-    },
-};
+const hooks = {};
 
 /*
 Un petit dictionnaire de couches utilisées dans les différentes cartes interactives. Elles sont à renseigner
@@ -128,3 +96,23 @@ const mapConfigurations = {
             zoom: 6,
         },
 };
+
+/*
+HTML customs
+ */
+const customHtml = {}
+
+
+// JavaScript pour ajuster dynamiquement la marge supérieure de la deuxième boîte
+document.addEventListener("DOMContentLoaded", stickyOffsets);
+
+window.addEventListener("resize", stickyOffsets);
+
+function stickyOffsets() {
+    console.log("hello !");
+    const firstBox = document.getElementById("boite1");
+    const secondBox = document.getElementById("boite2");
+
+    // Ajustons dynamiquement la marge supérieure de la deuxième boîte
+    secondBox.style.top = 'calc(var(--bulma-navbar-height) + 10px + ' + firstBox.offsetHeight + 'px)';
+}

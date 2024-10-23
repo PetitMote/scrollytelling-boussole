@@ -91,6 +91,9 @@ function scrollFigure(scrollData) {
             case 'map':
                 scrollMap(scrollData);
                 break;
+            case 'html':
+                scrollHtml(scrollData);
+                break;
         }
         registerFigureRegistryString(scrollData['scroll-figure'], figureRegistryString);
     } else {
@@ -113,6 +116,8 @@ function buildFigureRegistryString(scrollData) {
             return 'chart-' + scrollData['scroll-chart-name'];
         case 'map':
             return 'map-' + scrollData['scroll-map-name'];
+        case 'html':
+            return 'html-' + scrollData['scroll-html-name'];
     }
 }
 
@@ -164,6 +169,14 @@ function scrollImg(scrollData) {
      */
     const element = document.getElementById(scrollData['scroll-figure']);
     element.innerHTML = '<img src="' + scrollData['scroll-img-link'] + '" alt="' + scrollData['scroll-img-alt'] + '">';
+}
+
+function scrollHtml(scrollData) {
+    /*
+    Change une illustration par un html custom
+     */
+    const element = document.getElementById(scrollData['scroll-figure']);
+    element.innerHTML = customHtml[scrollData['scroll-html-name']];
 }
 
 function scrollChart(scrollData) {
