@@ -1,23 +1,3 @@
-/* Paramètres globaux pour ChartJS*/
-
-Chart.defaults.locale = 'fr-FR';
-/* À cause des réglages du CSS, le navigateur a tendance à redimensionner le canvas du graphique.
-   Par défaut, Chart.js désactive les animations de resize, et l’animation d’activation était supplantée par le resize
-   Changer le paramètre par défaut pour mettre la même valeur que l’activation permet de la récupérer.
-   Par contre, cela veut dire que redimensionner la fenêtre relance l’animation (normalement, c’est ok). */
-Chart.defaults.transitions.resize.animation.duration = Chart.defaults.transitions.active.animation.duration;
-// Permet d’avoir des graphiques plus responsives
-// Voir https://www.chartjs.org/docs/latest/configuration/responsive.html
-Chart.defaults.maintainAspectRatio = false;
-// Utilisation des couleurs Auran
-Chart.defaults.plugins.colors.enabled = false;
-Chart.register(aurancolors);
-// Polices
-Chart.defaults.font.family = "'Poppins', sans-serif";
-Chart.defaults.font.weight = 300;
-Chart.defaults.font.size = 14;
-
-
 /*
 Les registres sont des objets qui vont être remplies par le code Javascript afin de suivre l’état de la page.
 Par exemple, suivre quelles illustrations sont actuellement affichées pour savoir s’il faut la remplacer par une
@@ -80,7 +60,7 @@ function scrollFigure(scrollData) {
      */
     const figureRegistryString = buildFigureRegistryString(scrollData);
     if (!checkFigureRegistryString(scrollData['scroll-figure'], figureRegistryString)) {
-        cleanFigureIfNeeded(scrollData['scroll-figure']);
+        cleanFigureIfNeeded(scrollData['scroll-figure'], figureRegistryString);
         switch (scrollData['scroll-type']) {
             case 'img':
                 scrollImg(scrollData);
@@ -143,11 +123,11 @@ function cleanFigureIfNeeded(figureId, newFigureString) {
      */
     const existingFigureString = figureRegistry[figureId];
     if (existingFigureString) {
-        if (existingFigureString.startsWith('chart')) {
-            // Si la figure existante est un graphique
+        if (existingFigureString.startsWith('chart') && !newFigureString.startsWith('chart')) {
+            // Si la figure existante est un graphique, mais pas la suivante
             const existingChartName = existingFigureString.substring(6);
-            chartRegistry[existingChartName].destroy();
-            delete chartRegistry[existingChartName];
+            chartRegistry[figureId].dispose();
+            delete chartRegistry[figureId];
         } else if (existingFigureString.startsWith('map')) {
             // Si la figure existante est une carte
             const existingMapName = existingFigureString.substring(4);
@@ -187,12 +167,9 @@ function scrollChart(scrollData) {
      */
     // Préparation du HTML
     const figureId = scrollData['scroll-figure'];
-    const canvasId = figureId + '-chart';
-    const element = document.getElementById(figureId);
-    element.innerHTML = '<div class="chart"><canvas id="' + canvasId + '"></canvas></div>';
 
     // Création du graphique
-    createChart(canvasId, scrollData['scroll-chart-name']);
+    createOrUpdateChart(figureId, scrollData['scroll-chart-name']);
 }
 
 function scrollMap(scrollData) {
@@ -234,67 +211,23 @@ function scrollExistingMap(scrollData) {
 }
 
 
-function createChart(canvasId, chartName) {
+function createOrUpdateChart(figureId, chartName) {
     /*
-    Cette fonction crée de manière autonome un graphique à partir des configurations données.
-    Elle va chercher l’élément canvas correspondant à l’id pour héberger le graphique.
-    Le nom de graphique permet :
-    - D’aller chercher la configuration du graphique (type de graphique, titre, etc.)
-    - D’aller chercher les données du graphique
-    - D’enregistrer le graphique dans le registre
+    Cette fonction crée ou met à jour un graphique :
+    - Elle récupère la configuration du graphique
+    - Si un graphique n’existe pas encore encore, elle initialise le graphique
+    - Elle passe la configuration au graphique
+    Les changements sont gérés par la bibliothèque
      */
     // Récupération des informations
-    const canvas = document.getElementById(canvasId);
     const chartConfiguration = chartsConfigurations[chartName];
-    const chartData = data[chartName];
-
-    // Récupération des labels et des séries de données
-    let labels = [];
-    let series = {};
-    for (let row of chartData) {
-        labels.push(row.label);
-        for (let column in row) {
-            if (column === 'label')
-                continue;
-            if (!series[column])
-                series[column] = [row[column]];
-            else
-                series[column].push(row[column]);
-
-        }
+    if (!chartRegistry[figureId]) {
+        // S’il n’y a pas déjà un graphique existant
+        const figure = document.getElementById(figureId);
+        // Création du graphique
+        chartRegistry[figureId] = echarts.init(figure);
     }
-
-    // Préparation des séries de données au format ChartJS
-    let datasets = [];
-    for (let serie in series) {
-        datasets.push({
-            label: serie,
-            data: series[serie],
-        });
-    }
-
-    // Préparation de l’objet de configuration ChartJS
-    let chartParameters = {
-        type: chartConfiguration.type,
-        data: {
-            labels: labels,
-            datasets: datasets,
-        },
-        options: {
-            plugins: {
-                title: {
-                    display: (chartConfiguration.title !== null),
-                    text: chartConfiguration.title,
-                },
-                legend: {
-                    display: chartConfiguration.legend,
-                }
-            }
-        }
-    };
-
-    // Création du graphique et enregistrement dans le registre des graphiques
-    chartRegistry[chartName] = new Chart(canvas, chartParameters);
+    chartRegistry[figureId].setOption(chartConfiguration);
 }
 
 

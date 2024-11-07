@@ -12,30 +12,156 @@ La donnée est chargée avec en tête les exports de PostgreSQL :
 const data = {
     repartitionEmissions:
         [
-            {label: 'Transport de marchandises', 'Émissions (t.eqCO2)': 42},
-            {label: 'Tertiaire', 'Émissions (t.eqCO2)': 29},
-            {label: 'Industrie', 'Émissions (t.eqCO2)': 23},
-            {label: 'Agriculture', 'Émissions (t.eqCO2)': 4},
-            {label: 'Déchets', 'Émissions (t.eqCO2)': 2},
+            {'Secteur': 'Transport de marchandises', 'Émissions (t.eqCO2)': 42},
+            {'Secteur': 'Tertiaire', 'Émissions (t.eqCO2)': 29},
+            {'Secteur': 'Industrie', 'Émissions (t.eqCO2)': 23},
+            {'Secteur': 'Agriculture', 'Émissions (t.eqCO2)': 4},
+            {'Secteur': 'Déchets', 'Émissions (t.eqCO2)': 2},
         ]
 };
 /*
-Répertoire des configurations de graphiques, des objets contenant les informations suivantes :
-- title: le titre du graphique, ou null si le titre ne doit pas être affiché
-- type: le type de graphique, à piocher dans les types de graphique de ChartJS
-- legend: true pour afficher la légende, false pour la masquer
+Répertoire des configurations de graphiques, au format Apache Echarts
  */
 const chartsConfigurations = {
-    valeurEmissionsActEco: {
-        title: null,
-        type: 'pie',
-        legend: true,
+    graph1: {
+        title: {
+            text: 'Émissions de GES de Nantes Métropole',
+        },
+        dataset: {
+            dimensions: ['Année', 'emissions', 'activiteseco', 'label'],
+            source: [
+                {
+                    'Année': '2008',
+                    emissions: 2530,
+                    label: 'En 2008, les émissions de Nantes Métropole sont de plus de 2500 tonnes.'
+                },
+            ]
+        },
+        series: [
+            {
+                type: 'line',
+                encode: {
+                    x: 'Année',
+                    y: 'emissions',
+                },
+                symbolSize: 7,
+                label: {
+                    show: true,
+                    formatter: '{@label}',
+                    align: 'left',
+                },
+            }
+        ],
+        xAxis: {
+            type: 'time',
+            min: '2008',
+            max: '2021',
+        },
+        yAxis: {
+            type: 'value',
+            name: 'Émissions (t.eqC02)',
+        },
     },
-    repartitionEmissions: {
-        title: 'Répartition des émissions de gaz à effet de serre des activités économiques',
-        type: 'doughnut',
-        legend: true,
+    graph2: {
+        title: {
+            text: 'Émissions de GES de Nantes Métropole',
+        },
+        dataset: {
+            dimensions: ['Année', 'emissions', 'activiteseco', 'label'],
+            source: [
+                {'Année': '2008', 'emissions': 2530},
+                {'Année': '2021', 'emissions': 2400, label: 'Entre 2008 et 2021, elles diminuent de 5,2%'},
+            ]
+        },
+        series: [
+            {
+                type: 'line',
+                encode: {
+                    x: 'Année',
+                    y: 'emissions',
+                },
+                symbolSize: 7,
+                label: {
+                    show: true,
+                    formatter: '{@label}',
+                    align: 'right',
+                },
+            }
+        ],
+        xAxis: {
+            type: 'time',
+            min: '2008',
+        },
+        yAxis: {
+            type: 'value',
+            name: 'Émissions (t.eqC02)',
+        },
     },
+    graph3: {
+        title: {
+            text: 'Émissions de GES de Nantes Métropole',
+        },
+        dataset: {
+            dimensions: ['Année', 'emissions', 'activiteseco', 'label'],
+            source: [
+                {'Année': '2008', 'emissions': 2530, activiteseco: 1310},
+                {
+                    'Année': '2021',
+                    'emissions': 2400,
+                    activiteseco: 1200,
+                    label: 'Les émissions des activités économiques baissent de 8,6%',
+                },
+            ]
+        },
+        series: [
+            {
+                type: 'line',
+                encode: {
+                    x: 'Année',
+                    y: 'emissions',
+                },
+                symbolSize: 7,
+                label: {
+                    show: false,
+                },
+            },
+            {
+                type: 'line',
+                encode: {
+                    x: 'Année',
+                    y: 'activiteseco',
+                },
+                symbolSize: 7,
+                label: {
+                    show: true,
+                    formatter: '{@label}',
+                    align: 'right',
+                    position: 'bottom',
+                },
+            }
+        ],
+        xAxis: {
+            type: 'time',
+            min: '2008',
+            max: '2021',
+        },
+        yAxis: {
+            type: 'value',
+            name: 'Émissions (t.eqC02)',
+        },
+    },
+    repartitionEmissions:
+        {
+            title: {
+                text: 'Répartition des émissions de gaz à effet de serre des activités économiques',
+            },
+            tooltip: {},
+            dataset: {
+                dimensions: ['Secteur', 'Émissions (t.eqCO2)'],
+                source: data['repartitionEmissions'],
+            },
+            series: [{type: 'pie', radius: ['30%', '60%']}],
+        },
 };
 /*
 Répertoire des "hooks" : des fonctions à exécuter avant ou après certains évènements de scroll
@@ -109,7 +235,6 @@ document.addEventListener("DOMContentLoaded", stickyOffsets);
 window.addEventListener("resize", stickyOffsets);
 
 function stickyOffsets() {
-    console.log("hello !");
     const firstBox = document.getElementById("boite1");
     const secondBox = document.getElementById("boite2");
 
