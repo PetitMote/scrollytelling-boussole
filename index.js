@@ -1,6 +1,14 @@
 /* Constantes */
 
 
+const titles = [
+    'Réduction des GES',
+    'Préservation des ressources',
+    'Mobilité et logistique',
+    'Régénération du vivant',
+]
+
+
 /*
 La donnée est chargée avec en tête les exports de PostgreSQL :
 - Un objet, avec comme clés les noms des datasets
@@ -239,5 +247,5 @@ function stickyOffsets() {
     const secondBox = document.getElementById("boite2");
 
     // Ajustons dynamiquement la marge supérieure de la deuxième boîte
-    secondBox.style.top = 'calc(var(--bulma-navbar-height) + 10px + ' + firstBox.offsetHeight + 'px)';
+    secondBox.style.top = 'calc(var(--bulma-navbar-height) * 2 + 10px + ' + firstBox.offsetHeight + 'px)';
 }

@@ -40,6 +40,7 @@ function scrollEvent(scrollData) {
     Lance les hooks, s’il y en a, et entre les deux charge l’évènement principal
      */
     if (scrollData['scroll-pre-hook']) runHook(scrollData['scroll-pre-hook']);
+    scrollTitle(scrollData);
     if (scrollData['scroll-type']) scrollFigure(scrollData);
     if (scrollData['scroll-post-hook']) runHook(scrollData['scroll-post-hook']);
 }
@@ -84,6 +85,18 @@ function scrollFigure(scrollData) {
         }
     }
 }
+
+function scrollTitle(scrollData) {
+    console.log('ping');
+    const titleNumber = Number(scrollData['scroll-title']);
+    if (titleNumber) {
+        const title = document.getElementById('titre-sous-partie');
+        title.innerHTML = titles[titleNumber - 1];
+        document.getElementById('sous-partie-precedente').setAttribute('href', '#' + String(titleNumber - 1));
+        document.getElementById('sous-partie-suivante').setAttribute('href', '#' + String(titleNumber + 1));
+    }
+}
+
 
 function buildFigureRegistryString(scrollData) {
     /*

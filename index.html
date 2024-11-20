@@ -9,24 +9,35 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
           crossorigin=""/>
-    <script src="https://unpkg.com/echarts@5.5.1/dist/echarts.min.js"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js "></script>
+    <script defer src="static/fontawesome/all.min.js"></script>
 </head>
 
-<body class="has-navbar-fixed-top has-navbar-fixed-bottom">
+<body class="has-navbar-fixed-bottom">
 
-
-<header class="navbar is-fixed-top has-background-primary">
-    <div class="navbar-brand" style="width: 100%">
-        <a class="navbar-item py-0" href="https://www.auran.org">
-            <img src="static/auran-logoblanc.png" alt="Logo"
-                 style="max-height: calc(var(--bulma-navbar-height) - 10px)">
-        </a>
-        <div class="navbar-item" style="width: 100%">
-            <svg viewBox="0 0 420 20" class="title is-5 has-text-wite">
-                <!-- Changer le texte avec le titre voulu, puis adapter la 3e valeur de la viewBox au-dessus pour adapter la largeur apparente du motif -->
-                <text x="0" y="17" fill="#FFFFFF">Climat, ressources et biodiversité</text>
-            </svg>
+<header>
+    <div class="navbar is-background-primary">
+        <div class="navbar-brand" style="width: 100%">
+            <a class="navbar-item py-0" href="https://www.auran.org">
+                <img src="static/auran-logoblanc.png" alt="Logo"
+                     style="max-height: calc(var(--bulma-navbar-height) - 10px)">
+            </a>
+            <div class="navbar-item" style="width: 100%">
+                <svg viewBox="0 0 420 20" class="title is-5">
+                    <!-- Changer le texte avec le titre voulu, puis adapter la 3e valeur de la viewBox au-dessus pour adapter la largeur apparente du motif -->
+                    <text x="0" y="16" fill="#FFFFFF">Climat, ressources et biodiversité</text>
+                </svg>
+            </div>
         </div>
+    </div>
+    <div class="columns is-vcentered is-background-primary-light is-justify-content-space-around my-0">
+        <div class="column is-narrow"><a id="sous-partie-precedente"><i
+                class="fa-solid fa-square-caret-left fa-2xl"></i></a></div>
+        <div class="column is-narrow">
+            <div class="subtitle is-5" id="titre-sous-partie">Climat, ressources et biodiversité</div>
+        </div>
+        <div class="column is-narrow"><a id="sous-partie-suivante" href="#1"><i
+                class="fa-solid fa-square-caret-right fa-2xl"></i></a></div>
     </div>
 </header>
 
@@ -50,13 +61,17 @@
 
 
 <section class="section container is-max-widescreen paging">
+    <h2 id="1" class="title">Réduction des GES</h2>
+    <p class="subtitle">Contribution des entreprises à l’atteinte des objectifs de neutralité carbone à l’horizon
+        2050</p>
     <div class="columns stick-to-top">
         <div class="column is-two-thirds">
             <figure id="graph-animé" style="min-height: 50vh"></figure>
         </div>
     </div>
     <div style="padding: 10vh"></div>
-    <scroll-scene scroll-figure="graph-animé" scroll-type="chart" scroll-chart-name="graph1">
+    <scroll-scene scroll-figure="graph-animé" scroll-type="chart" scroll-chart-name="graph1"
+                  scroll-title="1">
         <div class="columns">
             <div class="column is-two-thirds"></div>
             <div class="column is-one-third">
@@ -65,7 +80,7 @@
             </div>
         </div>
     </scroll-scene>
-    <scroll-scene scroll-figure="graph-animé" scroll-type="chart" scroll-chart-name="graph2">
+    <scroll-scene scroll-figure="graph-animé" scroll-type="chart" scroll-chart-name="graph2" scroll-title="1">
         <div class="columns">
             <div class="column is-two-thirds"></div>
             <div class="column is-one-third">
@@ -76,7 +91,7 @@
                 </div>
                 <div style="padding-top: 30vh"></div>
                 <p class="is-size-1 has-text-link has-text-weight-semibold has-text-centered"
-                   style="margin-bottom: -20px">2 400<span class="is-size-3">t.eq CO2</span></p>
+                   style="margin-bottom: -20px;">2 400<span class="is-size-3">t.eq CO2</span></p>
                 <div class="notification is-link">
                     <p>les émissions de GES de Nantes Métropole en 2021</p>
                 </div>
@@ -84,7 +99,7 @@
         </div>
         <div style="padding-top: 30vh"></div>
     </scroll-scene>
-    <scroll-scene scroll-figure="graph-animé" scroll-type="chart" scroll-chart-name="graph3">
+    <scroll-scene scroll-figure="graph-animé" scroll-type="chart" scroll-chart-name="graph3" scroll-title="1">
         <div class="columns">
             <div class="column is-two-thirds"></div>
             <div class="column is-one-third">
@@ -107,12 +122,12 @@
 </section>
 
 <section class="section container is-max-widescreen paging">
-    <scroll-scene>
+    <scroll-scene scroll-title="1">
         <div class="stick-to-top" id="boite1">
-            <h2 class="title block">Contribution des entreprises à l’atteinte des objectifs de neutralité
-                carbone à
+            <h2 class="title">Réduction des GES</h2>
+            <p class="subtitle">Contribution des entreprises à l’atteinte des objectifs de neutralité carbone à
                 l’horizon
-                2050</h2>
+                2050</p>
             <div class="columns is-centered is-vcentered">
                 <div class="column is-one-third-desktop">
                     <div class="notification is-link">
@@ -158,7 +173,7 @@
         <div style="padding-top: 100vh;"></div>
     </scroll-scene>
     <scroll-scene scroll-figure="repartition-emissions" scroll-type="chart"
-                  scroll-chart-name="repartitionEmissions">
+                  scroll-chart-name="repartitionEmissions" scroll-title="1">
         <div class="columns is-vcentered">
             <div class="column is-two-thirds">
                 <figure id="repartition-emissions" style="min-height: 50vh"></figure>
@@ -182,11 +197,11 @@
 </div>
 
 <section class="section container is-max-widescreen paging">
-    <scroll-scene>
+    <scroll-scene scroll-title="2">
         <div class="stick-to-top">
-            <h2 class="title block">Contribution des entreprises à la préservation des ressources, au recyclage et au
-                réemploi -
-                é…</h2>
+            <h2 id="2" class="title">Préservation des ressources</h2>
+            <p class="subtitle">Contribution des entreprises à la préservation des ressources, au recyclage et au
+                réemploi</p>
             <div class="columns is-vcentered">
                 <div class="column is-one-third-desktop notification is-link my-0">
                     <p class="is-size-3 has-text-centered">+3,4%</p>
@@ -194,10 +209,10 @@
                 </div>
                 <div class="column is-two-thirds-desktop">
                     <p class="block">La consommation d’énergie des activités économiques a augmenté entre 2008 et 2021,
-                        en
-                        particulier dans le
-                        tertiaire et l’agriculture, malgré les efforts d’optimisation ou de sobriété qui ont pu être
-                        réalisés.</p>
+                        en particulier dans le tertiaire et l’agriculture,<span
+                                class="has-background-link has-text-white"> malgré les efforts d’optimisation </span>ou
+                        de
+                        sobriété qui ont pu être réalisés.</p>
                     <p class="block">L’atteinte des objectifs en matière de réduction des émissions de GES nécessitera
                         un
                         fort
@@ -230,13 +245,12 @@
 </div>
 
 <section class="section container is-max-widescreen paging">
-    <scroll-scene>
+    <scroll-scene scroll-title="2">
         <div>
             <div class="stick-to-top">
-                <h2 class="title block">Contribution des entreprises à la préservation des ressources, au recyclage et
-                    au
-                    réemploi -
-                    é…</h2>
+                <h2 class="title">Préservation des ressources</h2>
+                <p class="subtitle">Contribution des entreprises à la préservation des ressources, au recyclage et au
+                    réemploi</p>
                 <div class="columns is-vcentered">
                     <div class="column is-one-third-desktop notification is-link my-0">
                         <p class="is-size-3 has-text-centered">+3,4%</p>
@@ -280,8 +294,9 @@
 </section>
 
 <section class="section container is-max-widescreen paging">
-    <scroll-scene>
-        <h2 class="title block">Contribution des entreprises aux pratiques de mobilité et de logistique durables</h2>
+    <scroll-scene scroll-title="3">
+        <h2 id="3" class="title">Mobilité et logistique</h2>
+        <p class="subtitle">Contribution des entreprises aux pratiques de mobilité et de logistique durables</p>
         <div class="columns stick-to-top" style="min-height: 100vh">
             <div class="column has-background-white">
                 <div class="notification is-link">
@@ -330,174 +345,13 @@
     </scroll-scene>
 </section>
 
-<!--
-<section class="section px-0 full">
-    <figure id="intro">
-    </figure>
-    <scroll-scene scroll-figure="intro" scroll-type="img" scroll-img-link="data/france.png"
-                  scroll-img-alt="Contour géographique de la France Métropolitaine">
-        <div class="card">
-            <div class="card-content">
-                <p>La France métropolitaine représente 550 milliards de mètres carrés.</p>
-                <p>(55 millions d’hectares)</p>
-            </div>
-        </div>
-    </scroll-scene>
-    <scroll-scene scroll-figure="intro" scroll-type="img" scroll-img-link="data/france.png"
-                  scroll-img-alt="Contour géographique de la France Métropolitaine">
-        <div class="card">
-            <div class="card-content"><p>Il s’agit d’un des plus grands pays d’Europe. Mais quelle est la partie non
-                habitée ?</p></div>
-        </div>
-    </scroll-scene>
-    <scroll-scene scroll-figure="intro" scroll-type="img" scroll-img-link="data/france-aucun-habitant.png"
-                  scroll-img-alt="Contour géographique de la France Métropolitaine">
-        <div class="card">
-            <div class="card-content"><p>Regardons cela ensemble !</p></div>
-        </div>
-    </scroll-scene>
-</section>
-
-<div class="container">
-    <img src="static/hachures.svg" alt="Changement de section" height="45">
-</div>
-
-<section class="section px-0 side-by-side">
-    <div>
-        <scroll-scene scroll-figure="side-figure" scroll-type="img" scroll-img-link="data/france-aucun-habitant.png"
-                      scroll-img-alt="France métropolitaine et mise en valeur des zones sans aucun habitant.">
-            <h2 class="title">Des endroits vides en France</h2>
-            <p>Sur la carte ci-contre, en violet apparaissent les carrés d’1km de côté sans aucun habitant recensé
-                en 2017 par l’Insee / Filosofi.</p>
-            <p>On peut voir qu’il reste des lieux vides, notamment les montagnes, mais aussi les Landes ou la
-                Champagne.</p>
-        </scroll-scene>
-        <scroll-scene scroll-figure="side-figure" scroll-type="chart" scroll-chart-name="superficieFrance">
-            <h2 class="title">En superficie</h2>
-            <p>Le tiers environ du territoire n’est pas habité.</p>
-            <p>Cela signifie que la majorité du territoire est peuplé (sans prendre en compte les variations de
-                densité !)</p>
-        </scroll-scene>
-        <scroll-scene scroll-figure="side-figure" scroll-type="chart" scroll-chart-name="superficieRegions"
-                      scroll-pre-hook="superficieRegion">
-            <h2 class="title">Par région</h2>
-            <p>La surface inhabitée est très variable selon les régions, aussi bien en total qu’en proportion.</p>
-            <p>Cliquez sur le graphique à côté pour changer de région.</p>
-            <div class="container sbs-inside-chart" id="chart-sup-region">
-            </div>
-        </scroll-scene>
-    </div>
-    <figure id="side-figure" class="has-background-white">
-    </figure>
-</section>
-
-<div class="container">
-    <img src="static/hachures.svg" alt="Changement de section" height="45">
-</div>
-
-<section class="section container is-max-widescreen paging">
-    <scroll-scene scroll-figure="superficie-regions-list">
-        <h2 class="title">La même donnée</h2>
-        <p>Présentée en liste de graphiques</p>
-        <figure id="superficie-regions-list" style="display: flex; flex-wrap: wrap; justify-content: space-around;">
-        </figure>
-    </scroll-scene>
-</section>
-
-<div class="container">
-    <img src="static/hachures.svg" alt="Changement de section" height="45">
-</div>
-
-<section class="section px-0 side-by-side">
-    <div>
-        <scroll-scene scroll-figure="map-figure" scroll-type="map" scroll-map-name="habitants">
-            <h2 class="title">Où sont les habitants ?</h2>
-            <p>Sur la carte interactive ci-contre, vous pouvez regarder où il y a des habitants. Si la zone est en
-                rouge, alors il y a des habitants à cet endroit.</p>
-            <p>Contrairement aux images précédentes, basées sur les carreaux 1km de l’Insee, la forme a été
-                simplifiée. Il y a donc une petite perte de précision.</p>
-            <p>Continuez à scroller pour quelques exemples.</p>
-        </scroll-scene>
-        <scroll-scene scroll-figure="map-figure" scroll-type="map" scroll-map-name="habitants"
-                      scroll-map-coordinates="48.2, 5" scroll-map-zoom="8">
-            <h2 class="title">Grand Est vide</h2>
-            <p>De grands espaces vides dans le Grand Est.</p>
-        </scroll-scene>
-        <scroll-scene scroll-figure="map-figure" scroll-type="map" scroll-map-name="habitants"
-                      scroll-map-coordinates="44.2, 4.5" scroll-map-zoom="8">
-            <h2 class="title">Parcs nationaux</h2>
-            <p>On en trouve également dans le sud, du côté des parcs nationaux et de certaines zones montagneuses.
-                C’est le cas notamment des Cévennes, et des Alpes sud.</p>
-        </scroll-scene>
-        <scroll-scene scroll-figure="map-figure" scroll-type="map" scroll-map-name="habitants"
-                      scroll-map-coordinates="44.5, 0" scroll-map-zoom="8">
-            <h2 class="title">Landes de Gascogne</h2>
-            <p>Les Landes sont également peu habitées, présentant une situation assez exceptionnelle à l’ouest…</p>
-        </scroll-scene>
-        <scroll-scene scroll-figure="map-figure" scroll-type="map" scroll-map-name="habitants"
-                      scroll-map-coordinates="48, -1" scroll-map-zoom="8">
-            <h2 class="title">Grand Ouest</h2>
-            <p>…contrairement au nord-ouest, dont toute la surface ou presque est peuplée par au moins habitant.</p>
-        </scroll-scene>
-    </div>
-    <figure id="map-figure" class="has-background-white">
-        <div style="height: 100%; width: 100%"></div>
-    </figure>
-</section>
-
-<div class="container">
-    <img src="static/hachures.svg" alt="Changement de section" height="45">
-</div>
-
-<section class="section px-0 side-by-side">
-    <div>
-        <scroll-scene scroll-figure="side-demo-scroll" scroll-type="img"
-                      scroll-img-link="data/france-aucun-habitant.png"
-                      scroll-img-alt="France métropolitaine et mise en valeur des zones sans aucun habitant.">
-            <h2>Revoyons sous une autre forme…</h2>
-            <p>Parce que c’est quand même un démonstrateur. Là, on va le faire avec des images classiques et du
-                scroll.</p>
-        </scroll-scene>
-        <div>
-            <scroll-scene style="position: sticky; top: 0;" scroll-figure="side-demo-scroll" scroll-type="img"
-                          scroll-img-link="data/france-aucun-habitant.png"
-                          scroll-img-alt="France métropolitaine et mise en valeur des zones sans aucun habitant.">
-                <h2>Des espaces vides</h2>
-                <h3>Grand Est vide</h3>
-                <p>De grands espaces vides dans le Grand Est.</p>
-                <h3>Parcs nationaux</h3>
-                <p>On en trouve également dans le sud, du côté des parcs nationaux et de certaines zones
-                    montagneuses.
-                    C’est le cas notamment des Cévennes, et des Alpes sud.</p>
-                <h3>Landes de Gascogne</h3>
-                <p>Les Landes sont également peu habitées, présentant une situation assez exceptionnelle à
-                    l’ouest…</p>
-                <h3>Grand Ouest</h3>
-                <p>…contrairement au nord-ouest, dont toute la surface ou presque est peuplée par au moins
-                    habitant.</p>
-            </scroll-scene>
-            <scroll-scene scroll-figure="side-demo-scroll" scroll-type="img" scroll-img-link="data/grand-est.png"
-                          scroll-img-alt="Zoom sur Grand Est"></scroll-scene>
-            <scroll-scene scroll-figure="side-demo-scroll" scroll-type="img" scroll-img-link="data/parcs-nationaux.png"
-                          scroll-img-alt="Zoom Sud-Est"></scroll-scene>
-            <scroll-scene scroll-figure="side-demo-scroll" scroll-type="img" scroll-img-link="data/landes.png"
-                          scroll-img-alt="Zoom Landes"></scroll-scene>
-            <scroll-scene scroll-figure="side-demo-scroll" scroll-type="img" scroll-img-link="data/grand-ouest.png"
-                          scroll-img-alt="Zoom Bretagne et Pays de la Loire"></scroll-scene>
-        </div>
-    </div>
-    <figure id="side-demo-scroll" class="has-background-white">
-    </figure>
-</section>
--->
-
 
 <footer class="footer">
     <div class="container">
         <p class="has-text-centered">Sources</p>
     </div>
 </footer>
-<footer class="navbar is-fixed-bottom has-background-primary">
+<footer class="navbar is-fixed-bottom is-primary">
     <div class="container">
         <div class="navbar-brand">
             <div class="navbar-item has-text-primary-invert is-italic has-text-weight-light">Réalisation Auran</div>

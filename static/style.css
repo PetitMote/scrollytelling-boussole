@@ -1,5 +1,18 @@
 @charset "utf-8";
 
+/*body {*/
+/*    padding-top: calc(var(--bulma-navbar-height) * 2);*/
+/*}*/
+
+header {
+    min-height: calc(var(--bulma-navbar-height) * 2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+}
+
 img {
     height: 100%;
     max-width: 100%;
@@ -106,7 +119,7 @@ scroll-scene {
 
 .stick-to-top {
     position: sticky;
-    top: calc(var(--bulma-navbar-height) + 10px);
+    top: calc(var(--bulma-navbar-height) * 2 + 10px);
 }
 
 /* Media queries */
