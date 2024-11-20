@@ -138,7 +138,6 @@ function cleanFigureIfNeeded(figureId, newFigureString) {
     if (existingFigureString) {
         if (existingFigureString.startsWith('chart') && !newFigureString.startsWith('chart')) {
             // Si la figure existante est un graphique, mais pas la suivante
-            const existingChartName = existingFigureString.substring(6);
             chartRegistry[figureId].dispose();
             delete chartRegistry[figureId];
         } else if (existingFigureString.startsWith('map')) {
