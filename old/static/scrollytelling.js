@@ -20,53 +20,27 @@ document.addEventListener('scroll-scene-enter', (event) => {
     /*
     Réaction à l’arrivée d’un nouvel évènement de scroll
      */
+    // Ajout de la classe CSS de l’élément actif (par exemple pour gérer l’opacité)
+    event.detail.element.classList.add('is-active');
     // Récupération des informations d’animation de scroll à appliquer
     let scrollData = {};
     for (let attribute of event.detail.element.attributes) {
         if (attribute.name.startsWith('scroll'))
             scrollData[attribute.name] = attribute.value;
     }
-    if (scrollData['scroll-title'])
-        scrollTitle(scrollData['scroll-title']);
-    else {
-        // Ajout de la classe CSS de l’élément actif (par exemple pour gérer l’opacité)
-        event.detail.element.classList.add('is-active');
-        scrollEvent(scrollData);
-    }
+    scrollEvent(scrollData);
 });
 document.addEventListener('scroll-scene-exit', (event) => {
     // Lorsqu’on quitte un élément de scroll, on lui retire la classe CSS d’élément actif
     event.detail.element.classList.remove('is-active');
 });
 
-function scrollTitle(title) {
-    /*
-    Gère l’apparition/disparition du header
-    Rend actif le bon titre dans le header
-     */
-    let header = document.getElementById('header');
-    if (title === 'none')
-        // scroll-title="none" permet de masquer le header
-        header.classList.remove('is-active');
-    else {
-        header.classList.add('is-active');
-        // On récupère le numéro du titre
-        let titleNumber = Number(title);
-        let navbar = document.getElementById('navbar');
-        // On enlève la classe is-active des enfants de la navbar
-        for (let child of navbar.children) {
-            child.classList.remove('is-active');
-        }
-        // On ajoute la class is-active à l’élément de titre concerné
-        navbar.children[titleNumber - 1].classList.add('is-active');
-    }
-}
-
 function scrollEvent(scrollData) {
     /*
     Lance les hooks, s’il y en a, et entre les deux charge l’évènement principal
      */
     if (scrollData['scroll-pre-hook']) runHook(scrollData['scroll-pre-hook']);
+    scrollTitle(scrollData);
     if (scrollData['scroll-type']) scrollFigure(scrollData);
     if (scrollData['scroll-post-hook']) runHook(scrollData['scroll-post-hook']);
 }
@@ -109,6 +83,17 @@ function scrollFigure(scrollData) {
                 scrollExistingMap(scrollData);
                 break;
         }
+    }
+}
+
+function scrollTitle(scrollData) {
+    console.log('ping');
+    const titleNumber = Number(scrollData['scroll-title']);
+    if (titleNumber) {
+        const title = document.getElementById('titre-sous-partie');
+        title.innerHTML = titles[titleNumber - 1];
+        document.getElementById('sous-partie-precedente').setAttribute('href', '#' + String(titleNumber - 1));
+        document.getElementById('sous-partie-suivante').setAttribute('href', '#' + String(titleNumber + 1));
     }
 }
 
@@ -333,39 +318,3 @@ async function geoJsonToLayer(geoJson, options) {
 }
 
 
-function stickyTitles() {
-    /*
-    Pour les éléments "sticky" qui doivent s’accrocher au titre de leur partie
-    Va récupérer la hauteur du titre pour gérer le bon positionnement de l’élément sticky
-    Attention :
-    Ne fonctionne que si le titre est un voisin précédent, si c’est un parent, un voisin du parent… ça ne fonctionne pas
-     */
-    // On récupère les éléments qui veulent coller au titre
-    let stickToTitlesElements = document.getElementsByClassName('stick-to-title');
-
-
-    for (let element of stickToTitlesElements) {
-        // Pour chaque élément
-        let title;
-        let temp = element;
-        while (!title) {
-            // On remonte les voisins
-            temp = temp.previousElementSibling;
-            // Jusqu’à trouver celui qui a la bonne classe
-            if (temp.classList.contains('sticky-title'))
-                title = temp;
-        }
-
-        element.style.setProperty('top', 'calc(var(--header-height) + ' + title.clientHeight + 'px)');
-    }
-}
-
-function resizeCharts() {
-    for (let chart of chartRegistry) {
-        chart.resize();
-    }
-}
-
-document.addEventListener("DOMContentLoaded", stickyTitles);
-window.addEventListener("resize", stickyTitles);
-window.addEventListener("resize", resizeCharts);
