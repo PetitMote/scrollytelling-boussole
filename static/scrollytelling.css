@@ -102,7 +102,7 @@ header {
     box-shadow: 0 0 5px var(--color-black);
     padding-left: 5px;
     padding-right: 5px;
-    overflow: scroll;
+    overflow: auto;
     display: none; /* Hidden by default, to be displayed by JS */
     scrollbar-width: thin;
 
