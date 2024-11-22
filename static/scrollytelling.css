@@ -202,7 +202,7 @@ footer {
             width: var(--footer-height);
             flex: 0 0 var(--footer-height);
             margin-bottom: calc(-0.1 * var(--footer-height));
-            background: bottom / 70% no-repeat url("/old/static/auran-logoblanc.png");
+            background: bottom / 70% no-repeat url("/static/auran-logoblanc.png");
         }
     }
 
@@ -222,7 +222,8 @@ Hero : pleine page type première page
     width: 100vw;
     display: flex;
     justify-content: space-evenly;
-    background: calc(100% - 10px) calc(100% - 10px) / min(10%, 138px) no-repeat url("/old/static/auran-logoblanc.png");
+    align-content: center;
+    background: calc(100% - 10px) calc(100% - 10px) / min(10%, 100px) no-repeat url("/static/auran-logoblanc.png");
 
     .hero-full-element {
         max-width: 80%;
@@ -379,19 +380,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin-top: 100px;
     margin-bottom: 50px;
 }
 
 h2 {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     margin-top: 75px;
     margin-bottom: 37px;
 }
 
 h3 {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     margin-top: 50px;
     margin-bottom: 25px;
 }
@@ -456,11 +457,12 @@ Sticky elements
     top: calc(var(--header-height));
 
     &.sticky-title {
-        padding: 10px 0;
+        padding: 25px 0;
     }
 
     &.stick-to-title {
         top: calc(var(--header-height));
+        padding-top: 20px;
     }
 
     &.no-header {
