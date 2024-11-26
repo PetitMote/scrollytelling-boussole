@@ -20,14 +20,14 @@ body {
     --color-secondary-1: #AA2734;
     --color-secondary-1-light: #ED6C6D;
     --color-secondary-1-lighter: #F7BCB5;
-    /* Yellow */
-    --color-secondary-2: #F39339;
-    --color-secondary-2-light: #F7AB62;
-    --color-secondary-2-lighter: #FBCEA3;
     /* Blue */
-    --color-secondary-3: #46457E;
-    --color-secondary-3-light: #6D6DB1;
-    --color-secondary-3-lighter: #A7A5D2;
+    --color-secondary-2: #46457E;
+    --color-secondary-2-light: #6D6DB1;
+    --color-secondary-2-lighter: #A7A5D2;
+    /* Yellow */
+    --color-secondary-3: #F39339;
+    --color-secondary-3-light: #F7AB62;
+    --color-secondary-3-lighter: #FBCEA3;
     /* Others */
     --color-black: #1c1b1b;
     --color-black-light: #433e3e;
@@ -159,11 +159,14 @@ header {
     .title {
         font-family: "Caveat", cursive;
         font-weight: 700;
-        font-size: calc(var(--header-height) / 2);
+        font-size: calc(var(--header-height) / 2 - 16px);
         height: calc(var(--header-height) / 2);
         max-height: calc(var(--header-height) / 2);
-        overflow: clip;
+        white-space: nowrap;
         color: var(--color-title);
+        display: flex;
+        gap: 17px;
+        padding: 6px 15px;
     }
 
     nav {
