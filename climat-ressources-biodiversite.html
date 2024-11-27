@@ -13,7 +13,9 @@
 <body>
 
 <header id='header' class="is-secondary-1">
-    <div class="title"><img src="static/picto_sect1.svg"><div>Climat, ressources, et biodiversité</div></div>
+    <div class="title"><img src="static/climat-ressources-biodiversite/picto_sect1.svg">
+        <div>Climat, ressources, et biodiversité</div>
+    </div>
     <nav id="navbar">
         <a href="#" class="is-active"><span>Réduction des GES et pollutions</span></a>
         <a href="#"><span>Préservation des ressources et sobriété</span></a>
@@ -112,6 +114,40 @@
     </section>
 </scroll-scene>
 
+<scroll-scene scroll-title="4">
+    <section class="is-secondary-3 full-width">
+        <div class="columns">
+            <div class="column">
+                <h1 class="stick-to-top"><span>Contribution des entreprises aux pratiques de mobilité et de logistique durables</span>
+                </h1>
+                <scroll-scene scroll-figure="carte" scroll-type="map" scroll-map-name="conso_zan"
+                              class="min-full-height">
+                    <div class="key-value">
+                        <p class="value">38<span class="unit">ha</span></p>
+                        <p class="description">d’artificialisation annuelle d’espaces naturels, agricoles et forestiers
+                            liée au développement des activités économiques sur Nantes Métropole</p>
+                    </div>
+                    <p>Tout comme la création de logement et le développement des infrastructures, l’expansion des activités économiques contribue à l’artificialisation des sols, malgré un net ralentissement depuis ces 10 derniers années.</p>
+                </scroll-scene>
+                <scroll-scene scroll-figure="carte" scroll-type="map" scroll-map-name="cadastre_vert"
+                              class="min-full-height">
+                    <div class="key-value">
+                        <p class="value">37<span class="unit">%</span></p>
+                        <p class="description">part du couvert végétal (arbres, arbustes, herbes) au sein des zones
+                            d’activité</p>
+                    </div>
+                    <p>Les qualités écologiques et payasgères des parcs d’activités économiques sont extrêmement
+                        variables sur la métropole. Les espaces extérieurs qualitatifs et les plantations arborées y
+                        sont globalement mons présents que dans l’ensemble des espaces urbains de la métropole.</p>
+                </scroll-scene>
+            </div>
+            <div class="column is-size-2 stick-to-top">
+                <figure id="carte" class="full-pc full-height"></figure>
+            </div>
+        </div>
+    </section>
+</scroll-scene>
+
 <footer>
     <nav>
         <a href="./index.html">Revenir à la page d’accueil</a>
@@ -130,8 +166,6 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
         crossorigin=""></script>
 <script src="static/scrollytelling.js"></script>
-<!-- Pour l’instant on n’a pas besoin de ça
-<script src="index.js"></script>
--->
+<script src="static/climat-ressources-biodiversite/script.js"></script>
 </body>
 </html>
