@@ -29,7 +29,7 @@ La fonction geoJsonToLayer permet de charger une couche GeoJSON :
 Les couches doivent être en WGS84
  */
 const mapLayers = {
-    osm: L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}.png', {
+    osm: L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         /* Quelques autres liens pour layer de base utilisables :
