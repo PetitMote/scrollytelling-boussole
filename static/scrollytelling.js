@@ -213,16 +213,15 @@ function scrollMap(scrollData) {
     if (existingFigureString && existingFigureString.startsWith('map')) {
         // Si la figure existante est déjà une carte, plutôt que d’en créer une nouvelle
         // on la vide
-        const existingMapName = existingFigureString.substring(4);
-        removeLayersFromMap(existingMapName);
+        removeLayersFromMap(divId);
     } else {
         // Sinon création d’une nouvelle carte
         const element = document.getElementById(figureId);
         element.innerHTML = '<div id="' + divId + '" style="height: 100%; width: 100%"></div>';
-        createMap(divId, mapName);
+        createMap(divId);
     }
     // On ajoute les couches à la carte
-    addLayersToMap(mapName);
+    addLayersToMap(divId, mapName);
     // On définit le point de vue de la carte
     setViewMapFromScroll(scrollData);
 }
@@ -258,20 +257,20 @@ function createOrUpdateChart(figureId, chartName) {
 }
 
 
-function createMap(containerId, mapName) {
+function createMap(divId) {
     /*
     Crée une carte à partir de l’ID de son container. Enregistre la carte dans le registre des cartes.
      */
-    const mapContainer = document.getElementById(containerId);
-    mapRegistry[mapName] = L.map(mapContainer, {preferCanvas: true});
+    const mapContainer = document.getElementById(divId);
+    mapRegistry[divId] = L.map(mapContainer, {preferCanvas: true});
 }
 
-async function addLayersToMap(mapName) {
+async function addLayersToMap(divId, mapName) {
     /*
     Ajoute les couches mentionnées dans la configuration de la carte.
      */
     // Récupère la référence de la carte
-    const map = mapRegistry[mapName];
+    const map = mapRegistry[divId];
     // Récupère la configuration de la carte
     const mapConfig = mapConfigurations[mapName];
     // Récupère les couches, et les ajoute. Code asynchrone nécessaire pour les couches en GeoJSON
@@ -281,22 +280,22 @@ async function addLayersToMap(mapName) {
     }
 }
 
-function removeLayersFromMap(mapName) {
+function removeLayersFromMap(divId) {
     /*
     Retire toutes les couches d’une carte interactive
      */
-    const map = mapRegistry[mapName];
+    const map = mapRegistry[divId];
     map.eachLayer((layer) => {
         map.removeLayer(layer)
     });
 }
 
-function setViewMap(mapName, coordinates, zoom) {
+function setViewMap(divId, coordinates, zoom) {
     /*
     Modifie le pointe de vue d’une couche.
     Coordonnées au format WGS84 (latitude, longitude)
      */
-    const map = mapRegistry[mapName];
+    const map = mapRegistry[divId];
     map.setView(coordinates, zoom);
 }
 
@@ -305,6 +304,7 @@ function setViewMapFromScroll(scrollData) {
     Déplace la vue d’une carte à partir des coordonnées contenues dans les infos de l’évènement de scroll, ou à partir
     des coordonnées par défaut.
      */
+    const divId = scrollData['scroll-figure'] + '-map';
     const mapName = scrollData['scroll-map-name'];
 
     // Récupère les coordonnées depuis le scroll, et les formate au format Leaflet ([latitude, longitude])
@@ -317,8 +317,7 @@ function setViewMapFromScroll(scrollData) {
     let zoom = scrollData['scroll-map-zoom'];
     if (zoom) zoom = Number(zoom);
     else zoom = mapConfigurations[mapName].zoom;
-
-    setViewMap(mapName, coordinates, zoom);
+    setViewMap(divId, coordinates, zoom);
 }
 
 async function geoJsonToLayer(geoJson, options) {
