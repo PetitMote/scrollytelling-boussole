@@ -393,6 +393,7 @@ Sticky elements
 /* ------------------------------------------
 Generic styling
 ------------------------------------------ */
+/* scroll-scene elements are defined by the scrollytelling javascript library */
 scroll-scene {
     display: block;
 }
