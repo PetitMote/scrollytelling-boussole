@@ -12680,7 +12680,7 @@ var Canvas = Renderer.extend({
 		this._ctx.translate(-b.min.x, -b.min.y);
 
 		// Tell paths to redraw themselves
-		this.fire('updatePath');
+		this.fire('update');
 	},
 
 	_reset: function () {

@@ -12649,7 +12649,6 @@
   	},
 
   	_updatePaths: function () {
-          console.log('updatePath');
   		if (this._postponeUpdatePaths) { return; }
 
   		var layer;
