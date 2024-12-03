@@ -157,9 +157,20 @@ function cleanFigureIfNeeded(figureId, newFigureString) {
             delete chartRegistry[figureId];
         } else if (existingFigureString.startsWith('map')) {
             // Si la figure existante est une carte
-            const existingMapName = existingFigureString.substring(4);
+            const existingMapName = figureId + '-map';
             if (newFigureString.startsWith('map')) {
                 // Si la nouvelle figure est également une carte
+                /* ----------------------------------------------------
+                BUG CHEZ LEAFLET
+                https://github.com/Leaflet/Leaflet/issues/9542
+                Tant que le bug n’est pas corrigé, on doit supprimer la carte et la recréer
+                (moins optimisé)
+                -------------------------------------------------------
+                TODO: Enlever la partie suivante quand le bug est corrigé
+                 */
+                mapRegistry[existingMapName].remove();
+                delete mapRegistry[existingMapName];
+                /* Fin de la partie à enlever */
             } else {
                 // Si la nouvelle figure n’est pas une carte
                 mapRegistry[existingMapName].remove();
@@ -208,6 +219,14 @@ function scrollMap(scrollData) {
     const divId = figureId + '-map';
     const mapName = scrollData['scroll-map-name'];
 
+    /* ----------------------------------------------------
+
+     */
+    const element = document.getElementById(figureId);
+    element.innerHTML = '<div id="' + divId + '" style="height: 100%; width: 100%"></div>';
+    createMap(divId);
+    /* Fin de la partie à enlever, décommenter la partie suivante */
+    /*
     // Récupération de l’information de la figure existante
     const existingFigureString = figureRegistry[figureId];
     if (existingFigureString && existingFigureString.startsWith('map')) {
@@ -220,6 +239,7 @@ function scrollMap(scrollData) {
         element.innerHTML = '<div id="' + divId + '" style="height: 100%; width: 100%"></div>';
         createMap(divId);
     }
+    */
     // On ajoute les couches à la carte
     addLayersToMap(divId, mapName);
     // On définit le point de vue de la carte
