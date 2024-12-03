@@ -282,7 +282,7 @@ function createMap(divId) {
     Crée une carte à partir de l’ID de son container. Enregistre la carte dans le registre des cartes.
      */
     const mapContainer = document.getElementById(divId);
-    mapRegistry[divId] = L.map(mapContainer, {preferCanvas: true});
+    mapRegistry[divId] = L.map(mapContainer, {preferCanvas: true, scrollWheelZoom: false});
 }
 
 async function addLayersToMap(divId, mapName) {
