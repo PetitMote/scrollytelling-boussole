@@ -112,11 +112,11 @@
     </section>
 </scroll-scene>
 
-<scroll-scene scroll-title="3">
+<scroll-scene scroll-title="4">
     <section class="is-secondary-3 full-width">
         <div class="columns">
             <div class="column">
-                <h1 class="stick-to-top sticky-title has-background-white"><span>Contribution des entreprises aux pratiques de mobilité et de logistique durables</span>
+                <h1 class="stick-to-top sticky-title has-background-white"><span>Contribution des entreprises à la protection de la biodiversité et à l’adaptation au changement climatique - artificialisation des sols, îlots de chaleur, espaces naturels…</span>
                 </h1>
                 <scroll-scene scroll-figure="carte" scroll-type="map" scroll-map-name="conso_zan"
                               class="min-full-height">
@@ -139,6 +139,17 @@
                     <p>Les qualités écologiques et payasgères des parcs d’activités économiques sont extrêmement
                         variables sur la métropole. Les espaces extérieurs qualitatifs et les plantations arborées y
                         sont globalement mons présents que dans l’ensemble des espaces urbains de la métropole.</p>
+                </scroll-scene>
+                <scroll-scene scroll-figure="carte" scroll-type="map" scroll-map-name="icu"
+                              class="min-full-height">
+                    <div class="key-value">
+                        <p class="value">+3,9<span class="unit">°C</span></p>
+                        <p class="description">écart moyen de température observé en zone d’activité économique par
+                            rapport à l’ensemble de la métropole nantaise</p>
+                    </div>
+                    <p>Les îlots de chaleur urbains sont particulièrement présents au sein des parcs d’activités
+                        économiques. En lien avec leurs usages, ils sont fortement minéralisés : besoins en
+                        stationnement, entrepôts, voiries…</p>
                 </scroll-scene>
             </div>
             <div class="column is-size-2 stick-to-top">
@@ -163,10 +174,9 @@
 <!-- Chargement des scripts des bibliothèques JS -->
 <script src="https://unpkg.com/scroll-scene-element/dist/scroll-scene-element.js" type="module"></script>
 <!-- Leaflet production -->
-<!--<script src="/libraries/leaflet/leaflet.js"-->
-<!--        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="></script>-->
+<script src="./libraries/leaflet/leaflet.js"></script>
 <!-- Leaflet dev -->
-<script src="./libraries/leaflet/leaflet-src.js"></script>
+<!--<script src="./libraries/leaflet/leaflet-src.js"></script>-->
 <script src="static/scrollytelling.js"></script>
 <script src="static/climat-ressources-biodiversite/script.js"></script>
 </body>
