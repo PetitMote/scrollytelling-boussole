@@ -107,14 +107,9 @@ const mapLayers = {
 ;
 
 function style_icu(feature) {
-    console.log({
-        fillColor: color_icu(feature.properties.color),
-        fillOpacity: 1,
-        stroke: false,
-    });
     return {
         fillColor: color_icu(feature.properties.color),
-        fillOpacity: 1,
+        fillOpacity: 0.65,
         stroke: false,
     };
 }
