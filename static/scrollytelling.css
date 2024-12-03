@@ -377,11 +377,13 @@ Sticky elements
 
     &.sticky-title {
         padding: 25px 0;
+        z-index: 100;
     }
 
     &.stick-to-title {
         top: calc(var(--header-height));
         padding-top: 20px;
+        z-index: 99;
     }
 
     &.no-header {

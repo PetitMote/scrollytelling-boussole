@@ -368,8 +368,12 @@ function stickyTitles() {
         let title;
         let temp = element;
         while (!title) {
-            // On remonte les voisins
-            temp = temp.previousElementSibling;
+            if (temp.previousElementSibling === null)
+                // Si besoin on remonte au parent
+                temp = temp.parentElement;
+            else
+                // Sinon on remonte les voisins
+                temp = temp.previousElementSibling;
             // Jusqu’à trouver celui qui a la bonne classe
             if (temp.classList.contains('sticky-title'))
                 title = temp;
