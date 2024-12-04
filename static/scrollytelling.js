@@ -26,7 +26,6 @@ document.addEventListener('scroll-scene-enter', (event) => {
         if (attribute.name.startsWith('scroll'))
             scrollData[attribute.name] = attribute.value;
     }
-    console.log(scrollData);
     if (scrollData['scroll-title'])
         scrollTitle(scrollData['scroll-title']);
     else {
@@ -385,8 +384,8 @@ function stickyTitles() {
 }
 
 function resizeCharts() {
-    for (let chart of chartRegistry) {
-        chart.resize();
+    for (let chart in chartRegistry) {
+        chartRegistry[chart].resize();
     }
 }
 

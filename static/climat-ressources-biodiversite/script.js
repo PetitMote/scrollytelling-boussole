@@ -26,6 +26,10 @@ const data = {
         {annee: '2020', emissions: -440668.3, actEco: -220265},
         {annee: '2021', emissions: -130320.3, actEco: -21525.1},
     ],
+    emissionsSousSecteurs: [
+        {annee: '2008', transport: 472839, tertiaire: 372336, industrie: 348355, agriculture: 57496, autres: 37028},
+        {annee: '2021', transport: 477007, tertiaire: 345098, industrie: 270513, agriculture: 48112, autres: 38529},
+    ],
 };
 /*
 Répertoire des configurations de graphiques, au format Apache Echarts
@@ -105,6 +109,180 @@ const chartsConfigurations = {
             yAxis: {
                 type: 'value',
                 name: 'Émissions (t.eqCO2)',
+            },
+        },
+    emissionsSousSecteurs:
+        {
+            tooltip: {},
+            dataset: {
+                dimensions: ['annee', 'transport', 'tertiaire', 'industrie', 'agriculture', 'autres'],
+                source: data.emissionsSousSecteurs,
+            },
+            series: [
+                {
+                    name: 'Transport',
+                    type: 'line',
+                    color: '#433e3e',
+                    encode: {
+                        x: 'annee',
+                        y: 'transport',
+                    },
+                    label: {
+                        show: true,
+                        formatter: '{@transport}\n{a}',
+                    },
+                },
+                {
+                    name: 'Tertiaire',
+                    type: 'line',
+                    color: '#433e3e',
+                    encode: {
+                        x: 'annee',
+                        y: 'tertiaire',
+                    },
+                    label: {
+                        show: true,
+                        formatter: '{@tertiaire}\n{a}',
+                    },
+                },
+                {
+                    name: 'Industrie',
+                    type: 'line',
+                    color: '#433e3e',
+                    encode: {
+                        x: 'annee',
+                        y: 'industrie',
+                    },
+                    label: {
+                        show: true,
+                        formatter: '{@industrie}\n{a}',
+                    },
+                },
+                {
+                    name: 'Agriculture',
+                    type: 'line',
+                    color: '#433e3e',
+                    encode: {
+                        x: 'annee',
+                        y: 'agriculture',
+                    },
+                    label: {
+                        show: true,
+                        formatter: '{@agriculture}\n{a}',
+                    },
+                },
+                {
+                    name: 'Autres',
+                    type: 'line',
+                    color: '#433e3e',
+                    encode: {
+                        x: 'annee',
+                        y: 'autres',
+                    },
+                    label: {
+                        show: true,
+                        formatter: '{@autres}\n{a}',
+                    },
+                },
+            ],
+            xAxis: {
+                type: 'time',
+                min: 'dataMin',
+                max: 'dataMax',
+                axisLine: {
+                    show: false,
+                },
+                axisTick: {
+                    show: false,
+                },
+                axisLabel: {
+                    customValues: ['2008', '2021'],
+                },
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Émissions (t.eqCO2)',
+                show: false,
+                min: 'dataMin',
+            },
+        },
+    emissionsSousSecteursEmphase:
+        {
+            tooltip: {},
+            dataset: {
+                dimensions: ['annee', 'transport', 'tertiaire', 'industrie', 'agriculture', 'autres'],
+                source: data.emissionsSousSecteurs,
+            },
+            series: [
+                {
+                    name: 'Transport',
+                    type: 'line',
+                    color: '#a19696',
+                    encode: {
+                        x: 'annee',
+                        y: 'transport',
+                    },
+                },
+                {
+                    name: 'Tertiaire',
+                    type: 'line',
+                    color: '#a19696',
+                    encode: {
+                        x: 'annee',
+                        y: 'tertiaire',
+                    },
+                },
+                {
+                    name: 'Industrie',
+                    type: 'line',
+                    color: '#CA3D66',
+                    encode: {
+                        x: 'annee',
+                        y: 'industrie',
+                    },
+                    label: {
+                        show: true,
+                        formatter: '{@industrie}\n{a}',
+                    },
+                },
+                {
+                    name: 'Agriculture',
+                    type: 'line',
+                    color: '#a19696',
+                    encode: {
+                        x: 'annee',
+                        y: 'agriculture',
+                    },
+                },
+                {
+                    name: 'Autres',
+                    type: 'line',
+                    color: '#a19696',
+                    encode: {
+                        x: 'annee',
+                        y: 'autres',
+                    },
+                },
+            ],
+            xAxis: {
+                type: 'time',
+                min: 'dataMin',
+                max: 'dataMax',
+                axisLine: {
+                    show: false,
+                },
+                axisTick: {
+                    show: false,
+                },
+                axisLabel: {
+                    customValues: ['2008', '2021'],
+                },
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Émissions (t.eqCO2)',
+                show: false,
+                min: 'dataMin',
             },
         },
 };
