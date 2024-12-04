@@ -26,6 +26,7 @@ document.addEventListener('scroll-scene-enter', (event) => {
         if (attribute.name.startsWith('scroll'))
             scrollData[attribute.name] = attribute.value;
     }
+    console.log(scrollData);
     if (scrollData['scroll-title'])
         scrollTitle(scrollData['scroll-title']);
     else {
@@ -273,7 +274,7 @@ function createOrUpdateChart(figureId, chartName) {
         // Création du graphique
         chartRegistry[figureId] = echarts.init(figure);
     }
-    chartRegistry[figureId].setOption(chartConfiguration);
+    chartRegistry[figureId].setOption(chartConfiguration, true);
 }
 
 

@@ -421,6 +421,14 @@ scroll-scene {
     }
 }
 
+.min-half-height {
+    min-height: calc(50vh - var(--header-height));
+
+    &.no-header {
+        min-height: 50vh;
+    }
+}
+
 .full-height {
     height: calc(100vh - var(--header-height));
 

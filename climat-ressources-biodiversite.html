@@ -6,7 +6,7 @@
     <title>Climat, ressources et biodiversité | Boussole de l’économie soutenable</title>
     <link rel="stylesheet" href="static/scrollytelling.css">
     <link rel="stylesheet" href="./libraries/leaflet/leaflet.css"/>
-    <script src=" https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js "></script>
+    <script src=" https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.js "></script>
 </head>
 <body>
 
@@ -54,6 +54,41 @@
                     ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
                     voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
                     proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+        </div>
+        <div class="columns stick-to-top stick-to-title has-background-white">
+            <div class="column is-size-2 stick-to-top stick-to-title">
+                <figure id="graph-emissions" class="min-half-height"></figure>
+            </div>
+            <div class="column">
+                <scroll-scene scroll-figure="graph-emissions" scroll-type="chart"
+                              scroll-chart-name="emissionsAnnuellesNM">
+                    <p class="stick-to-top stick-to-title min-full-height"><span class="bold">Entre 2008 et 2021</span>,
+                        les émissions globales de Gaz à Effet de Serre (GES) sur Nantes Métropole ont <span
+                                class="bold">diminué d’environ 5%</span>. Elles sont ainsi passées de près de
+                        2550t.eqCO2 à <strong class="bold">2415t.eqCO2.</strong></p>
+                    <div class="min-half-height"></div>
+                    <p class="stick-to-top stick-to-title min-full-height has-background-white">Alors que dans le même
+                        temps la population métropolitaine a augmenté de manière significative (de 580 000 habitants à
+                        près de 680 000 en 2021), <em class="bold">les émissions par habitant ont donc connu une
+                            diminution globale de 19% sur la période.</em></p>
+                    <div class="min-half-height"></div>
+                </scroll-scene>
+                <scroll-scene scroll-figure="graph-emissions" scroll-type="chart"
+                              scroll-chart-name="emissionsAnnuellesActEco">
+                    <p class="stick-to-top stick-to-title min-full-height">
+                        Les <span class="bold">émissions liées aux activités économiques</span> qui représentent
+                        globalement <strong class="bold">près de la moitié des émissions totales</strong> du territoire
+                        métropolitain, sont dans le même temps passées de 1280 à <strong class="bold">1172
+                        t.eqCO2</strong>, soit une <strong class="bold">diminution de l’ordre de 8,5%.</strong>
+                    </p>
+                    <div class="min-half-height"></div>
+                    <p class="stick-to-top stick-to-title min-full-height has-background-white">
+                        Cela traduit donc que les émissions des activités économiques ont <span class="bold">contribué significativement</span>
+                        à la baisse totale des émissions.
+                    </p>
+                    <div class="min-half-height"></div>
+                </scroll-scene>
             </div>
         </div>
     </section>

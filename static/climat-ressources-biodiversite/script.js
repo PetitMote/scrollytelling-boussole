@@ -9,11 +9,105 @@ La donnée est chargée avec en tête les exports de PostgreSQL :
 - Il doit obligatoirement y avoir une colonne "label" : il sert à donner les noms des valeurs / points
 - Les noms des autres colonnes sont ceux des séries de données
  */
-const data = {};
+const data = {
+    emissionsAnnuellesNM: [
+        {annee: '2008', emissions: 0, actEco: 0},
+        {annee: '2009', emissions: -74192.38, actEco: -35198},
+        {annee: '2010', emissions: 14027.468, actEco: 25642.8},
+        {annee: '2011', emissions: -129611.5, actEco: -34483.4},
+        {annee: '2012', emissions: -65538.98, actEco: 22298.9},
+        {annee: '2013', emissions: -8934.408, actEco: 58386.4},
+        {annee: '2014', emissions: -173643.3, actEco: -27257.4},
+        {annee: '2015', emissions: -159620.6, actEco: -18411.8},
+        {annee: '2016', emissions: -120920.1, actEco: 10933.5},
+        {annee: '2017', emissions: -138925.3, actEco: -9313.44},
+        {annee: '2018', emissions: -154316.8, actEco: -47289.9},
+        {annee: '2019', emissions: -137585.5, actEco: -45932.3},
+        {annee: '2020', emissions: -440668.3, actEco: -220265},
+        {annee: '2021', emissions: -130320.3, actEco: -21525.1},
+    ],
+};
 /*
 Répertoire des configurations de graphiques, au format Apache Echarts
  */
-const chartsConfigurations = {};
+const chartsConfigurations = {
+    emissionsAnnuellesNM:
+        {
+            title: {
+                text: 'Une diminution progressive des émissions de GES',
+            },
+            tooltip: {},
+            dataset: {
+                dimensions: ['annee', 'emissions', 'actEco'],
+                source: data.emissionsAnnuellesNM,
+            },
+            series: [
+                {
+                    type: 'line',
+                    smooth: true,
+                    smoothMonotone: 'x',
+                    encode: {
+                        x: 'annee',
+                        y: 'emissions',
+                    },
+                    areaStyle: {},
+                },
+            ],
+            xAxis: {
+                type: 'time',
+                name: 'Année',
+                min: '2008',
+                max: '2021',
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Émissions (t.eqCO2)',
+            },
+        },
+    emissionsAnnuellesActEco:
+        {
+            title: {
+                text: 'Une diminution progressive des émissions de GES',
+            },
+            tooltip: {},
+            dataset: {
+                dimensions: ['annee', 'emissions', 'actEco'],
+                source: data.emissionsAnnuellesNM,
+            },
+            series: [
+                {
+                    type: 'line',
+                    smooth: true,
+                    smoothMonotone: 'x',
+                    encode: {
+                        x: 'annee',
+                        y: 'emissions',
+                    },
+                    areaStyle: {},
+                },
+                {
+                    type: 'line',
+                    smooth: true,
+                    smoothMonotone: 'x',
+                    encode: {
+                        x: 'annee',
+                        y: 'actEco',
+                    },
+                    areaStyle: {},
+                },
+            ],
+            xAxis: {
+                type: 'time',
+                name: 'Année',
+                min: '2008',
+                max: '2021',
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Émissions (t.eqCO2)',
+            },
+        },
+};
 /*
 Répertoire des "hooks" : des fonctions à exécuter avant ou après certains évènements de scroll
  */
