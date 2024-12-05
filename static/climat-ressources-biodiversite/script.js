@@ -54,6 +54,7 @@ const chartsConfigurations = {
                         x: 'annee',
                         y: 'emissions',
                     },
+                    color: colors.primary1,
                     areaStyle: {},
                 },
             ],
@@ -87,6 +88,7 @@ const chartsConfigurations = {
                         x: 'annee',
                         y: 'emissions',
                     },
+                    color: colors.primary1,
                     areaStyle: {},
                 },
                 {
@@ -97,6 +99,7 @@ const chartsConfigurations = {
                         x: 'annee',
                         y: 'actEco',
                     },
+                    color: colors.primary2,
                     areaStyle: {},
                 },
             ],
@@ -122,7 +125,7 @@ const chartsConfigurations = {
                 {
                     name: 'Transport',
                     type: 'line',
-                    color: '#433e3e',
+                    color: colors.blacklight,
                     encode: {
                         x: 'annee',
                         y: 'transport',
@@ -135,7 +138,7 @@ const chartsConfigurations = {
                 {
                     name: 'Tertiaire',
                     type: 'line',
-                    color: '#433e3e',
+                    color: colors.blacklight,
                     encode: {
                         x: 'annee',
                         y: 'tertiaire',
@@ -148,7 +151,7 @@ const chartsConfigurations = {
                 {
                     name: 'Industrie',
                     type: 'line',
-                    color: '#433e3e',
+                    color: colors.blacklight,
                     encode: {
                         x: 'annee',
                         y: 'industrie',
@@ -161,7 +164,7 @@ const chartsConfigurations = {
                 {
                     name: 'Agriculture',
                     type: 'line',
-                    color: '#433e3e',
+                    color: colors.blacklight,
                     encode: {
                         x: 'annee',
                         y: 'agriculture',
@@ -174,7 +177,7 @@ const chartsConfigurations = {
                 {
                     name: 'Autres',
                     type: 'line',
-                    color: '#433e3e',
+                    color: colors.blacklight,
                     encode: {
                         x: 'annee',
                         y: 'autres',
@@ -217,7 +220,7 @@ const chartsConfigurations = {
                 {
                     name: 'Transport',
                     type: 'line',
-                    color: '#a19696',
+                    color: colors.blacklighter,
                     encode: {
                         x: 'annee',
                         y: 'transport',
@@ -226,7 +229,7 @@ const chartsConfigurations = {
                 {
                     name: 'Tertiaire',
                     type: 'line',
-                    color: '#a19696',
+                    color: colors.blacklighter,
                     encode: {
                         x: 'annee',
                         y: 'tertiaire',
@@ -235,7 +238,7 @@ const chartsConfigurations = {
                 {
                     name: 'Industrie',
                     type: 'line',
-                    color: '#CA3D66',
+                    color: colors.primary2,
                     encode: {
                         x: 'annee',
                         y: 'industrie',
@@ -248,7 +251,7 @@ const chartsConfigurations = {
                 {
                     name: 'Agriculture',
                     type: 'line',
-                    color: '#a19696',
+                    color: colors.blacklighter,
                     encode: {
                         x: 'annee',
                         y: 'agriculture',
@@ -257,7 +260,7 @@ const chartsConfigurations = {
                 {
                     name: 'Autres',
                     type: 'line',
-                    color: '#a19696',
+                    color: colors.blacklighter,
                     encode: {
                         x: 'annee',
                         y: 'autres',
@@ -303,7 +306,8 @@ Les couches doivent être en WGS84
 const mapLayers = {
         osm: L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
-            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            opacity: 0.6,
             /* Quelques autres liens pour layer de base utilisables :
             Fond OpenStreetMap par défaut :
             https://tile.openstreetmap.org/{z}/{x}/{y}.png

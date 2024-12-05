@@ -15,6 +15,31 @@ let chartRegistry = {};
 // Registre des cartes interactives Leaflet pour interaction / suppression
 let mapRegistry = {};
 
+let colors = {
+    primary1: getComputedStyle(document.body).getPropertyValue('--color-primary-1'),
+    primary1light: getComputedStyle(document.body).getPropertyValue('--color-primary-1-light'),
+    primary1lighter: getComputedStyle(document.body).getPropertyValue('--color-primary-lighter'),
+    primary2: getComputedStyle(document.body).getPropertyValue('--color-primary-2'),
+    primary2light: getComputedStyle(document.body).getPropertyValue('--color-primary-2-light'),
+    primary2lighter: getComputedStyle(document.body).getPropertyValue('--color-primary-lighter'),
+    primary3: getComputedStyle(document.body).getPropertyValue('--color-primary-3'),
+    primary3light: getComputedStyle(document.body).getPropertyValue('--color-primary-3-light'),
+    primary3lighter: getComputedStyle(document.body).getPropertyValue('--color-primary-lighter'),
+    secondary1: getComputedStyle(document.body).getPropertyValue('--color-secondary-1'),
+    secondary1light: getComputedStyle(document.body).getPropertyValue('--color-secondary-1-light'),
+    secondary1lighter: getComputedStyle(document.body).getPropertyValue('--color-secondary-lighter'),
+    secondary2: getComputedStyle(document.body).getPropertyValue('--color-secondary-2'),
+    secondary2light: getComputedStyle(document.body).getPropertyValue('--color-secondary-2-light'),
+    secondary2lighter: getComputedStyle(document.body).getPropertyValue('--color-secondary-lighter'),
+    secondary3: getComputedStyle(document.body).getPropertyValue('--color-secondary-3'),
+    secondary3light: getComputedStyle(document.body).getPropertyValue('--color-secondary-3-light'),
+    secondary3lighter: getComputedStyle(document.body).getPropertyValue('--color-secondary-lighter'),
+    black: getComputedStyle(document.body).getPropertyValue('--color-black'),
+    blacklight: getComputedStyle(document.body).getPropertyValue('--color-black-light'),
+    blacklighter: getComputedStyle(document.body).getPropertyValue('--color-black-lighter'),
+    white3: getComputedStyle(document.body).getPropertyValue('--color-white-3'),
+}
+
 
 document.addEventListener('scroll-scene-enter', (event) => {
     /*
@@ -383,6 +408,37 @@ function stickyTitles() {
     }
 }
 
+function stickyAnchors() {
+    let stickToAnchorsElements = document.getElementsByClassName('stick-to-anchor');
+
+    for (let element of stickToAnchorsElements) {
+        let anchor;
+        let temp = element;
+        while (!anchor) {
+            if (temp.previousElementSibling === null)
+                // Si besoin on remonte au parent
+                temp = temp.parentElement;
+            else
+                // Sinon on remonte les voisins
+                temp = temp.previousElementSibling;
+            // Jusqu’à trouver celui qui a la bonne classe
+            if (temp.classList.contains('sticky-anchor'))
+                anchor = temp;
+        }
+
+        let top;
+        if (anchor.classList.contains('stick-to-title')) {
+            top = anchor.style.getPropertyValue('top');
+            top = top.slice(0, -1);
+            top = top + ' + ' + anchor.clientHeight + 'px)';
+        }
+        else
+            top = 'calc(var(--header-height) + ' + anchor.clientHeight + 'px)';
+
+        element.style.setProperty('top', top);
+    }
+}
+
 function resizeCharts() {
     for (let chart in chartRegistry) {
         chartRegistry[chart].resize();
@@ -390,5 +446,7 @@ function resizeCharts() {
 }
 
 document.addEventListener("DOMContentLoaded", stickyTitles);
+document.addEventListener("DOMContentLoaded", stickyAnchors);
 window.addEventListener("resize", stickyTitles);
+window.addEventListener("resize", stickyAnchors);
 window.addEventListener("resize", resizeCharts);
