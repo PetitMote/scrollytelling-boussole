@@ -387,23 +387,8 @@ function stickyTitles() {
     // On récupère les éléments qui veulent coller au titre
     let stickToTitlesElements = document.getElementsByClassName('stick-to-title');
 
-
     for (let element of stickToTitlesElements) {
-        // Pour chaque élément
-        let title;
-        let temp = element;
-        while (!title) {
-            if (temp.previousElementSibling === null)
-                // Si besoin on remonte au parent
-                temp = temp.parentElement;
-            else
-                // Sinon on remonte les voisins
-                temp = temp.previousElementSibling;
-            // Jusqu’à trouver celui qui a la bonne classe
-            if (temp.classList.contains('sticky-title'))
-                title = temp;
-        }
-
+        let title = findUpNeighborOrParentWithClass(element, 'sticky-title');
         element.style.setProperty('top', 'calc(var(--header-height) + ' + title.clientHeight + 'px)');
     }
 }
@@ -412,31 +397,41 @@ function stickyAnchors() {
     let stickToAnchorsElements = document.getElementsByClassName('stick-to-anchor');
 
     for (let element of stickToAnchorsElements) {
-        let anchor;
-        let temp = element;
-        while (!anchor) {
-            if (temp.previousElementSibling === null)
-                // Si besoin on remonte au parent
-                temp = temp.parentElement;
-            else
-                // Sinon on remonte les voisins
-                temp = temp.previousElementSibling;
-            // Jusqu’à trouver celui qui a la bonne classe
-            if (temp.classList.contains('sticky-anchor'))
-                anchor = temp;
-        }
+        let anchor = findUpNeighborOrParentWithClass(element, 'sticky-anchor');
 
         let top;
         if (anchor.classList.contains('stick-to-title')) {
             top = anchor.style.getPropertyValue('top');
             top = top.slice(0, -1);
             top = top + ' + ' + anchor.clientHeight + 'px)';
-        }
-        else
+        } else
             top = 'calc(var(--header-height) + ' + anchor.clientHeight + 'px)';
 
         element.style.setProperty('top', top);
     }
+}
+
+function findUpNeighborOrParentWithClass(baseElement, classToFind) {
+    // Pour chaque élément
+    let findy;
+    let temp = baseElement;
+    while (!findy) {
+        if (temp.previousElementSibling === null)
+            // Si besoin on remonte au parent
+            temp = temp.parentElement;
+        else
+            // Sinon on remonte les voisins
+            temp = temp.previousElementSibling;
+        // Jusqu’à trouver celui qui a la bonne classe
+        if (temp.classList.contains(classToFind))
+            findy = temp;
+    }
+    return findy;
+}
+
+function stickyElements() {
+    setTimeout(stickyTitles, 100);
+    setTimeout(stickyAnchors, 150);
 }
 
 function resizeCharts() {
@@ -445,8 +440,6 @@ function resizeCharts() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", stickyTitles);
-document.addEventListener("DOMContentLoaded", stickyAnchors);
-window.addEventListener("resize", stickyTitles);
-window.addEventListener("resize", stickyAnchors);
+document.addEventListener("DOMContentLoaded", stickyElements);
+window.addEventListener("resize", stickyElements);
 window.addEventListener("resize", resizeCharts);
