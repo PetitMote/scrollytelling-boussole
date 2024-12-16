@@ -69,6 +69,10 @@ body {
 /* ------------------------------------------
 Section coloring
 ------------------------------------------ */
+.is-white {
+    --section-color: var(--color-white);
+}
+
 .is-primary-1 {
     --section-color: var(--color-primary-1);
     --section-color-light: var(--color-primary-1-light);
@@ -250,6 +254,7 @@ Hero : pleine page type première page
     display: flex;
     justify-content: space-evenly;
     align-content: center;
+    align-items: center;
     background: calc(100% - 10px) calc(100% - 10px) / min(10%, 100px) no-repeat url("./auran-logoblanc.png"),
     var(--section-color);
     color: var(--color-text-white);
