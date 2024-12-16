@@ -321,6 +321,7 @@ Key-values
 ------------------------------------------ */
 .key-value {
     max-width: var(--key-value-max-width);
+
     .value {
         color: var(--section-color);
         font-size: 3rem;
@@ -367,13 +368,12 @@ ul {
     }
 }
 
-.is-text-colored {
-    color: var(--section-color);
-
+.no-highlight {
     .bold {
         background-color: unset;
         color: var(--section-color);
         padding: 0;
+        font-weight: 700;
     }
 }
 

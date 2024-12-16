@@ -113,6 +113,9 @@ const chartsConfigurations = {
                 type: 'value',
                 name: 'Émissions (t.eqCO2)',
             },
+            legend: {
+                top: "center",
+            },
         },
     emissionsSousSecteurs:
         {
