@@ -40,6 +40,9 @@ const chartsConfigurations = {
             title: {
                 text: 'Une diminution progressive des émissions de GES',
             },
+            grid: {
+                right: 100,
+            },
             tooltip: {},
             legend: {
                 top: 'bottom',
@@ -79,11 +82,17 @@ const chartsConfigurations = {
                 type: 'value',
                 name: 'Émissions (t.eqCO2)',
             },
+            textStyle: {
+                fontSize: 14,
+            },
         },
     emissionsAnnuellesActEco:
         {
             title: {
                 text: 'Une diminution progressive des émissions de GES',
+            },
+            grid: {
+                right: 100,
             },
             tooltip: {},
             legend: {
@@ -109,7 +118,7 @@ const chartsConfigurations = {
                         show: true,
                         formatter: '{a}',
                         color: 'inherit',
-                        width: '70',
+                        width: 70,
                         overflow: 'break',
                     },
                 },
@@ -128,7 +137,7 @@ const chartsConfigurations = {
                         show: true,
                         formatter: '{a}',
                         color: 'inherit',
-                        width: '80',
+                        width: 95,
                         overflow: 'break',
                     },
                 },
@@ -143,9 +152,15 @@ const chartsConfigurations = {
                 type: 'value',
                 name: 'Émissions (t.eqCO2)',
             },
+            textStyle: {
+                fontSize: 14,
+            },
         },
     emissionsSousSecteurs:
         {
+            grid: {
+                right: 100,
+            },
             tooltip: {},
             dataset: {
                 dimensions: ['annee', 'transport', 'tertiaire', 'industrie', 'agriculture', 'autres'],
@@ -168,8 +183,6 @@ const chartsConfigurations = {
                         show: true,
                         formatter: '{a}',
                         color: 'inherit',
-                        width: '70',
-                        overflow: 'break',
                     },
                 },
                 {
@@ -188,8 +201,6 @@ const chartsConfigurations = {
                         show: true,
                         formatter: '{a}',
                         color: 'inherit',
-                        width: '70',
-                        overflow: 'break',
                     },
                 },
                 {
@@ -209,8 +220,6 @@ const chartsConfigurations = {
                         show: true,
                         formatter: '{a}',
                         color: 'inherit',
-                        width: '70',
-                        overflow: 'break',
                     },
                 },
                 {
@@ -229,8 +238,6 @@ const chartsConfigurations = {
                         show: true,
                         formatter: '{a}',
                         color: 'inherit',
-                        width: '70',
-                        overflow: 'break',
                     },
                 },
                 {
@@ -250,8 +257,6 @@ const chartsConfigurations = {
                         show: true,
                         formatter: '{a}',
                         color: 'inherit',
-                        width: '70',
-                        overflow: 'break',
                     },
                 },
             ],
@@ -275,9 +280,15 @@ const chartsConfigurations = {
                 show: false,
                 min: (value) => value.min-15000,
             },
+            textStyle: {
+                fontSize: 14,
+            },
         },
     emissionsSousSecteursEmphase:
         {
+            grid: {
+                right: 100,
+            },
             tooltip: {},
             dataset: {
                 dimensions: ['annee', 'transport', 'tertiaire', 'industrie', 'agriculture', 'autres'],
@@ -320,8 +331,6 @@ const chartsConfigurations = {
                         show: true,
                         formatter: '{a}',
                         color: 'inherit',
-                        width: '70',
-                        overflow: 'break',
                     },
                 },
                 {
@@ -362,6 +371,9 @@ const chartsConfigurations = {
                 name: 'Émissions (t.eqCO2)',
                 show: false,
                 min: (value) => value.min-15000,
+            },
+            textStyle: {
+                fontSize: 14,
             },
         },
 };
