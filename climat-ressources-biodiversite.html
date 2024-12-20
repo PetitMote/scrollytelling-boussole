@@ -6,7 +6,7 @@
     <title>Climat, ressources et biodiversité | Boussole de l’économie soutenable</title>
     <link rel="stylesheet" href="static/scrollytelling.css">
     <link rel="stylesheet" href="./libraries/leaflet/leaflet.css"/>
-    <script src=" https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.js "></script>
+    <script src="./libraries/echarts/echarts.min.js"></script>
 </head>
 <body>
 
@@ -36,7 +36,7 @@
         </h1>
         <div class="columns stick-to-top stick-to-title has-background-white">
             <div class="column is-size-2 stick-to-top stick-to-title">
-                <figure id="graph-emissions" class="min-half-height"></figure>
+                <figure id="graph-emissions" class="min-full-height-with-title"></figure>
             </div>
             <div class="column">
                 <scroll-scene scroll-figure="graph-emissions" scroll-type="chart"
