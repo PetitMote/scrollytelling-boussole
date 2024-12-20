@@ -41,12 +41,16 @@ const chartsConfigurations = {
                 text: 'Une diminution progressive des émissions de GES',
             },
             tooltip: {},
+            legend: {
+                top: 'bottom',
+            },
             dataset: {
                 dimensions: ['annee', 'emissions', 'actEco'],
                 source: data.emissionsAnnuellesNM,
             },
             series: [
                 {
+                    name: 'Émissions totales',
                     type: 'line',
                     smooth: true,
                     smoothMonotone: 'x',
@@ -56,6 +60,13 @@ const chartsConfigurations = {
                     },
                     color: colors.primary1,
                     areaStyle: {},
+                    endLabel: {
+                        show: true,
+                        formatter: '{a}',
+                        color: 'inherit',
+                        width: '70',
+                        overflow: 'break',
+                    },
                 },
             ],
             xAxis: {
@@ -75,12 +86,16 @@ const chartsConfigurations = {
                 text: 'Une diminution progressive des émissions de GES',
             },
             tooltip: {},
+            legend: {
+                top: 'bottom',
+            },
             dataset: {
                 dimensions: ['annee', 'emissions', 'actEco'],
                 source: data.emissionsAnnuellesNM,
             },
             series: [
                 {
+                    name: 'Émissions totales',
                     type: 'line',
                     smooth: true,
                     smoothMonotone: 'x',
@@ -90,8 +105,16 @@ const chartsConfigurations = {
                     },
                     color: colors.primary1,
                     areaStyle: {},
+                    endLabel: {
+                        show: true,
+                        formatter: '{a}',
+                        color: 'inherit',
+                        width: '70',
+                        overflow: 'break',
+                    },
                 },
                 {
+                    name: 'Activités économiques',
                     type: 'line',
                     smooth: true,
                     smoothMonotone: 'x',
@@ -101,6 +124,13 @@ const chartsConfigurations = {
                     },
                     color: colors.primary2,
                     areaStyle: {},
+                    endLabel: {
+                        show: true,
+                        formatter: '{a}',
+                        color: 'inherit',
+                        width: '80',
+                        overflow: 'break',
+                    },
                 },
             ],
             xAxis: {
@@ -112,9 +142,6 @@ const chartsConfigurations = {
             yAxis: {
                 type: 'value',
                 name: 'Émissions (t.eqCO2)',
-            },
-            legend: {
-                top: "center",
             },
         },
     emissionsSousSecteurs:
@@ -135,7 +162,14 @@ const chartsConfigurations = {
                     },
                     label: {
                         show: true,
-                        formatter: '{@transport}\n{a}',
+                        formatter: (params) => label_sous_secteurs(params),
+                    },
+                    endLabel: {
+                        show: true,
+                        formatter: '{a}',
+                        color: 'inherit',
+                        width: '70',
+                        overflow: 'break',
                     },
                 },
                 {
@@ -148,7 +182,14 @@ const chartsConfigurations = {
                     },
                     label: {
                         show: true,
-                        formatter: '{@tertiaire}\n{a}',
+                        formatter: (params) => label_sous_secteurs(params),
+                    },
+                    endLabel: {
+                        show: true,
+                        formatter: '{a}',
+                        color: 'inherit',
+                        width: '70',
+                        overflow: 'break',
                     },
                 },
                 {
@@ -161,7 +202,15 @@ const chartsConfigurations = {
                     },
                     label: {
                         show: true,
-                        formatter: '{@industrie}\n{a}',
+                        position: 'bottom',
+                        formatter: (params) => label_sous_secteurs(params),
+                    },
+                    endLabel: {
+                        show: true,
+                        formatter: '{a}',
+                        color: 'inherit',
+                        width: '70',
+                        overflow: 'break',
                     },
                 },
                 {
@@ -174,7 +223,14 @@ const chartsConfigurations = {
                     },
                     label: {
                         show: true,
-                        formatter: '{@agriculture}\n{a}',
+                        formatter: (params) => label_sous_secteurs(params),
+                    },
+                    endLabel: {
+                        show: true,
+                        formatter: '{a}',
+                        color: 'inherit',
+                        width: '70',
+                        overflow: 'break',
                     },
                 },
                 {
@@ -187,7 +243,15 @@ const chartsConfigurations = {
                     },
                     label: {
                         show: true,
-                        formatter: '{@autres}\n{a}',
+                        position: 'bottom',
+                        formatter: (params) => label_sous_secteurs(params),
+                    },
+                    endLabel: {
+                        show: true,
+                        formatter: '{a}',
+                        color: 'inherit',
+                        width: '70',
+                        overflow: 'break',
                     },
                 },
             ],
@@ -209,7 +273,7 @@ const chartsConfigurations = {
                 type: 'value',
                 name: 'Émissions (t.eqCO2)',
                 show: false,
-                min: 'dataMin',
+                min: (value) => value.min-15000,
             },
         },
     emissionsSousSecteursEmphase:
@@ -248,7 +312,16 @@ const chartsConfigurations = {
                     },
                     label: {
                         show: true,
-                        formatter: '{@industrie}\n{a}',
+                        position: 'bottom',
+                        formatter: (params) => label_sous_secteurs(params),
+                        color: 'inherit',
+                    },
+                    endLabel: {
+                        show: true,
+                        formatter: '{a}',
+                        color: 'inherit',
+                        width: '70',
+                        overflow: 'break',
                     },
                 },
                 {
@@ -288,7 +361,7 @@ const chartsConfigurations = {
                 type: 'value',
                 name: 'Émissions (t.eqCO2)',
                 show: false,
-                min: 'dataMin',
+                min: (value) => value.min-15000,
             },
         },
 };
@@ -385,6 +458,54 @@ const mapLayers = {
     }
 ;
 
+/*
+Configurations des cartes, sous forme d’un dictionnaire.
+Les clés sont les noms des cartes (à renseigner dans l’attribut scroll-map-name dans le HTML)
+Chaque configuration est un objet contenant :
+- layers : une liste des couches à ajouter à la carte, dans l’ordre (de la couche du dessous à la couche du dessus)
+- coordinates : coordonnées par défaut de la carte (au format WGS84)
+- zoom : niveau de zoom par défaut (6 est le niveau nécessaire pour afficher toute la France Métropolitaine)
+ */
+const mapConfigurations = {
+    conso_zan:
+        {
+            layers: [mapLayers.osm, mapLayers.conso_zan_zae, mapLayers.zae, mapLayers.communes_nm],
+            coordinates: [47.22, -1.56],
+            zoom: 12,
+        },
+    cadastre_vert:
+        {
+            layers: [mapLayers.osm, mapLayers.arbres_zae, mapLayers.vegetation_autre, mapLayers.zae, mapLayers.communes_nm],
+            coordinates: [47.22, -1.56],
+            zoom: 12,
+        },
+    icu:
+        {
+            layers: [mapLayers.osm, mapLayers.icu_zae, mapLayers.zae, mapLayers.communes_nm],
+            coordinates: [47.22, -1.56],
+            zoom: 12,
+        }
+};
+
+/*
+HTML customs
+ */
+const customHtml = {}
+
+/*
+Fonctions custom utilisées en paramètres des librairies de graphiques ou de cartes.
+*/
+
+function label_sous_secteurs(params) {
+    return new Intl.NumberFormat().format(params.data[params.dimensionNames[params.encode.y[0]]]);
+}
+
+function label_sous_secteurs_layout(params) {
+    if (params.dataIndex === 0) {
+        return;
+    }
+}
+
 function style_icu(feature) {
     return {
         fillColor: color_icu(feature.properties.color),
@@ -428,37 +549,3 @@ function color_icu(c) {
                                                                                                                                 c > 30 ? '#d73e18' :
                                                                                                                                     '#000000';
 }
-
-/*
-Configurations des cartes, sous forme d’un dictionnaire.
-Les clés sont les noms des cartes (à renseigner dans l’attribut scroll-map-name dans le HTML)
-Chaque configuration est un objet contenant :
-- layers : une liste des couches à ajouter à la carte, dans l’ordre (de la couche du dessous à la couche du dessus)
-- coordinates : coordonnées par défaut de la carte (au format WGS84)
-- zoom : niveau de zoom par défaut (6 est le niveau nécessaire pour afficher toute la France Métropolitaine)
- */
-const mapConfigurations = {
-    conso_zan:
-        {
-            layers: [mapLayers.osm, mapLayers.conso_zan_zae, mapLayers.zae, mapLayers.communes_nm],
-            coordinates: [47.22, -1.56],
-            zoom: 12,
-        },
-    cadastre_vert:
-        {
-            layers: [mapLayers.osm, mapLayers.arbres_zae, mapLayers.vegetation_autre, mapLayers.zae, mapLayers.communes_nm],
-            coordinates: [47.22, -1.56],
-            zoom: 12,
-        },
-    icu:
-        {
-            layers: [mapLayers.osm, mapLayers.icu_zae, mapLayers.zae, mapLayers.communes_nm],
-            coordinates: [47.22, -1.56],
-            zoom: 12,
-        }
-};
-
-/*
-HTML customs
- */
-const customHtml = {}
